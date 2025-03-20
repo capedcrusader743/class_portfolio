@@ -1,9 +1,15 @@
 import { assets, workData } from '@/assets/assets';
-import React from 'react';
+import React, { useState } from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion'; // Ensure you import `motion` from 'framer-motion'
 
 const Work = ({ isDarkMode }) => {
+  const [activeIndex, setActiveIndex] = useState(null);
+
+  const handleCardClick = (index) => {
+    setActiveIndex(activeIndex === index ? null : index);
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -52,12 +58,21 @@ const Work = ({ isDarkMode }) => {
             key={index}
             className='aspect-square bg-no-repeat bg-cover bg-center rounded-lg relative cursor-pointer group overflow-hidden'
             style={{ backgroundImage: `url(${project.bgImage})` }}
+            onClick={() => handleCardClick(index)}
           >
-            {/* Overlay (visible only on hover) */}
-            <div className='absolute inset-0 bg-black opacity-0 group-hover:opacity-50 transition-opacity duration-500'></div>
+            {/* Overlay (visible on hover or when active) */}
+            <div
+              className={`absolute inset-0 bg-black transition-opacity duration-500 ${
+                activeIndex === index ? 'opacity-50' : 'opacity-0 group-hover:opacity-50'
+              }`}
+            ></div>
 
-            {/* Content (slides up on hover) */}
-            <div className='absolute bottom-0 left-0 right-0 bg-white rounded-t-lg p-5 transform translate-y-full group-hover:translate-y-0 transition-transform duration-500'>
+            {/* Content (slides up on hover or when active) */}
+            <div
+              className={`absolute bottom-0 left-0 right-0 bg-white rounded-t-lg p-5 transform transition-transform duration-500 ${
+                activeIndex === index ? 'translate-y-0' : 'translate-y-full group-hover:translate-y-0'
+              }`}
+            >
               <div>
                 <h2 className='font-semibold'>{project.title}</h2>
                 <p className='text-sm text-gray-700'>{project.description}</p>
