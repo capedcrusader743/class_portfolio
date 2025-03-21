@@ -73,16 +73,19 @@ const Work = ({ isDarkMode }) => {
                 activeIndex === index ? 'translate-y-0' : 'translate-y-full group-hover:translate-y-0'
               }`}
             >
-              <div>
-                <h2 className='font-semibold'>{project.title}</h2>
-                <p className='text-sm text-gray-700'>{project.description}</p>
-              </div>
-              {/* Expanded Details */}
-              <div className='text-sm text-gray-700 mt-2'>
-                <p><strong>Role:</strong> {project.role}</p>
-                <p><strong>Technologies:</strong> {project.technologies.join(', ')}</p>
-                <p><strong>Outcomes:</strong> {project.outcomes}</p>
-                <p><strong>Learnings:</strong> {project.learnings}</p>
+              {/* Scrollable Content Area */}
+              <div className='max-h-[200px] overflow-y-auto'>
+                <div>
+                  <h2 className='font-semibold'>{project.title}</h2>
+                  <p className='text-sm text-gray-700'>{project.description}</p>
+                </div>
+                {/* Expanded Details */}
+                <div className='text-sm text-gray-700 mt-2'>
+                  <p><strong>Role:</strong> {project.role}</p>
+                  <p><strong>Technologies:</strong> {project.technologies.join(', ')}</p>
+                  <p><strong>Outcomes:</strong> {project.outcomes}</p>
+                  <p><strong>Learnings:</strong> {project.learnings}</p>
+                </div>
               </div>
               <div className='border rounded-full border-black w-9 aspect-square flex items-center justify-center shadow-[2px_2px_0_#000] group-hover:bg-lime-300 transition mt-3'>
                 <Image src={assets.send_icon} alt='send icon' className='w-5' />
